@@ -2,6 +2,7 @@ from kivy.app import App
 from kivy.lang import Builder
 from jnius import autoclass
 from android_notify import Notification
+from android_notify import NotificationHandler
 from android.permissions import request_permissions, Permission
 import schedule
 import time
@@ -11,6 +12,7 @@ import time
 #     servicename=u'Notify'
 # )
 
+NotificationHandler.asks_permission(Permission.POST_NOTIFICATIONS)
 permissions = [Permission.POST_NOTIFICATIONS]
 request_permissions(permissions)
 
@@ -28,12 +30,12 @@ class NotificationApp(App):
     def build(self):
         return Builder.load_string(KV)
 
-    # @staticmethod
-    # def notify():
-    #     Notification(
-    #         title="Hello",
-    #         message="This is a basic notification."
-    #     ).send()
+    @staticmethod
+    def notify():
+        Notification(
+            title="Hello",
+            message="This is a basic notification."
+        ).send()
 
     # @staticmethod
     # def notification_method():
