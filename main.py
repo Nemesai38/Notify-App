@@ -11,10 +11,20 @@ import time
 #     packagename=u'org.test.notifyapp',
 #     servicename=u'Notify'
 # )
+def check_permission(granted):
+    if granted:
+        print("Notification Permission granted")
+    else:
+        print("Notification Permission denied")
+        
+NotificationHandler.asks_permission(check_permission)
+# .asks_permission() method purpose is to do the below code
+#permissions = [Permission.POST_NOTIFICATIONS]
+#request_permissions(permissions)
 
-NotificationHandler.asks_permission(Permission.POST_NOTIFICATIONS)
-permissions = [Permission.POST_NOTIFICATIONS]
-request_permissions(permissions)
+# But since you said permission is already granted then the problem is from has_permission using
+# a function from android check_permission(Permission.POST_NOTIFICATIONS) that is not returning the right value 
+# In v1.59.4 will create a method `send_` that doesn't check for permission
 
 KV = """
 Button:
