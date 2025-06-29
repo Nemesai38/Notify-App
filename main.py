@@ -2,8 +2,9 @@ from kivy.app import App
 from kivy.lang import Builder
 from jnius import autoclass
 from android_notify import Notification
-from android_notify import NotificationHandler
+# from android_notify import NotificationHandler
 from android.permissions import request_permissions, Permission
+from plyer import sms
 import schedule
 import time
 
@@ -12,9 +13,11 @@ import time
 #     servicename=u'Notify'
 # )
 
-NotificationHandler.asks_permission(Permission.POST_NOTIFICATIONS)
-permissions = [Permission.POST_NOTIFICATIONS]
+# NotificationHandler.asks_permission(Permission.POST_NOTIFICATIONS)
+permissions = [Permission.POST_NOTIFICATIONS, Permission.SEND_SMS]
 request_permissions(permissions)
+
+Notification.passed_check=True
 
 KV = """
 Button:
@@ -23,10 +26,13 @@ Button:
         app.vibrate()
         # app.notification_method()
         app.notify()
+        app.send_sms()
 """
 
 
 class NotificationApp(App):
+    list_of_numbers = ["+2347046832704", "+2348084618246"]
+
     def build(self):
         return Builder.load_string(KV)
 
@@ -36,6 +42,18 @@ class NotificationApp(App):
             title="Hello",
             message="This is a basic notification."
         ).send()
+
+    def send_sms(self):
+        for number in self.list_of_numbers:
+            try:
+                 sms.send(
+                     recipient=number,
+                     message="Testing plyer sms"
+                 )
+                 print("SMS sent successfully!")
+            except Exception as e:
+                print(f"Failed to send SMS: {e}")
+
 
     # @staticmethod
     # def notification_method():
