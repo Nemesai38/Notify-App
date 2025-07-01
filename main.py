@@ -5,10 +5,10 @@ from android_notify import Notification
 from android.permissions import request_permissions, Permission
 
 
-SERVICE_NAME = u'{packagename}.Service{servicename}'.format(
-    packagename=u'org.test.notifyapp',
-    servicename=u'Notify'
-)
+# SERVICE_NAME = u'{packagename}.Service{servicename}'.format(
+#     packagename=u'org.test.notifyapp',
+#     servicename=u'Notify'
+# )
 
 permissions = [Permission.POST_NOTIFICATIONS, Permission.SEND_SMS]
 request_permissions(permissions)
@@ -42,10 +42,12 @@ class NotificationApp(App):
     @staticmethod
     def start_foreground_service():
         print("trying to start service......")
+        # service = autoclass(SERVICE_NAME)
+        mActivity = autoclass('org.kivy.android.PythonActivity').mActivity
+        context = mActivity.getApplicationContext()
+        SERVICE_NAME = str(context.getPackageName()) + '.Service' + 'Notify'
         service = autoclass(SERVICE_NAME)
-        mActivity = autoclass(u'org.kivy.android.PythonActivity').mActivity
-        argument = ''
-        service.start(mActivity, argument)
+        service.start(mActivity, "")
         return service
 
     @staticmethod
