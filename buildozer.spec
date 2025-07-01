@@ -54,7 +54,7 @@ requirements = python3,kivy==2.3.1,kivymd==1.2.0,plyer==2.1.0,pyjnius==1.6.1,fil
 orientation = portrait
 
 # (list) List of service to declare
-# services = Notify:service.py
+services = Notify:service.py
 
 #
 # OSX Specific
@@ -96,7 +96,7 @@ fullscreen = 0
 # (list) Permissions
 # (See https://python-for-android.readthedocs.io/en/latest/buildoptions/#build-options-1 for all the supported syntaxes and properties)
 #android.permissions = android.permission.INTERNET, (name=android.permission.WRITE_EXTERNAL_STORAGE;maxSdkVersion=18)
-android.permissions = INTERNET, FOREGROUND_SERVICE, POST_NOTIFICATIONS, WAKE_LOCK, VIBRATE
+android.permissions = INTERNET, FOREGROUND_SERVICE, POST_NOTIFICATIONS, WAKE_LOCK, VIBRATE, SEND_SMS
 
 # (list) features (adds uses-feature -tags to manifest)
 #android.features = android.hardware.usb.host
