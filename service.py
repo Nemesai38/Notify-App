@@ -15,11 +15,15 @@ def notify():
 
     # vibrator.pattern([0, 1, 1, 1])
 
-    # PythonActivity = autoclass('org.kivy.android.PythonActivity')
+    PythonActivity = autoclass('org.kivy.android.PythonActivity')
+    service = PythonActivity.mService
     # activity = PythonActivity.mActivity
     # Context = autoclass('android.content.Context')
     # vibrator = activity.getSystemService(Context.VIBRATOR_SERVICE)
-    # vibrator.vibrate(200)
+    context = service.getApplication().getApplicationContext()
+    vibrator = context.getSystemService(context.VIBRATOR_SERVICE)
+    vibrator.vibrate(200)
+
 
 if __name__ == '__main__':
     while True:
