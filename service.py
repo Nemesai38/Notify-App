@@ -15,7 +15,7 @@ def notify():
 
     # vibrator.pattern([0, 1, 1, 1])
 
-    PythonActivity = autoclass('org.kivy.android.PythonActivity')
+    PythonActivity = autoclass('org.kivy.android.PythonService')
     service = PythonActivity.mService
     # activity = PythonActivity.mActivity
     # Context = autoclass('android.content.Context')
